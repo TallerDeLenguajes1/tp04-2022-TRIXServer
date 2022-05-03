@@ -14,7 +14,7 @@ struct tarea
 
 struct nodo
 {
-    tarea tareaEnNodo; //nodoTarea
+    tarea tareaEnNodo; 
     nodo * next;
 } typedef nodo;
 
@@ -55,7 +55,7 @@ nodo * crearNodo()
 
 nodo * cargarNodo(int i)
 {
-    nodo * nuevoNodo = (nodo *) malloc(sizeof(nodo)); //nuevo Nodo
+    nodo * nuevoNodo = (nodo *) malloc(sizeof(nodo));
     nuevoNodo->next = NULL;
 
     int duracion;
