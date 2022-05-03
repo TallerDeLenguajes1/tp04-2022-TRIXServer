@@ -16,11 +16,6 @@ void controlarTareas(tarea **, tarea **, int);
 void mostrarTareasRealizadas(tarea ** , int );
 void mostrarTareasPendientes(tarea ** , int );
 
-void buscarTareaPorID(tarea **, int);
-void buscarTareaPorPalabra(tarea **, int);
-
-
-
 int main(int argc, char const *argv[])
 {
     int cantTareas;
@@ -45,10 +40,6 @@ int main(int argc, char const *argv[])
     mostrarTareasRealizadas(ppTareasRealizadas, cantTareas);
 
     mostrarTareasPendientes(ppTareas, cantTareas);
-
-    buscarTareaPorID(ppTareas, cantTareas);
-
-    buscarTareaPorPalabra(ppTareas, cantTareas);
 
     return 0;
 }
@@ -148,51 +139,6 @@ void mostrarTareasPendientes(tarea ** ppTareas, int cantTareas)
             printf("Duracion de la tarea \t%d minutos\n", ppTareas[i]->duracion);
             printf("--\n");
             
-        }
-    }
-}
-
-
-void buscarTareaPorID(tarea ** ppTareas, int cantTareas)
-{
-    int buscar;
-
-    printf("--\n");
-    printf("Ingrese el ID a buscar: ");
-    scanf("%d", &buscar);
-    fflush(stdin);
-
-    for (int i = 0; i < cantTareas; i++)
-    {
-        if (ppTareas[i]->tareaID == buscar)
-        {
-            printf("Tarea ID \t%d\n", ppTareas[i]->tareaID);
-            printf("Descripcion de la tarea:\n");
-            puts(ppTareas[i]->pDescripcion);
-            printf("Duracion de la tarea \t%d minutos\n", ppTareas[i]->duracion);
-            printf("--\n");
-        }
-    }
-}
-
-void buscarTareaPorPalabra(tarea ** ppTareas, int cantTareas)
-{
-    char buscar[MAX];
-
-    printf("--\n");
-    printf("Ingrese la palabra a buscar: ");
-    gets(buscar);
-    fflush(stdin);
-
-    for (int i = 0; i < cantTareas; i++)
-    {
-        if (strstr(ppTareas[i]->pDescripcion, buscar))
-        {
-            printf("Tarea ID \t%d\n", ppTareas[i]->tareaID);
-            printf("Descripcion de la tarea:\n");
-            puts(ppTareas[i]->pDescripcion);
-            printf("Duracion de la tarea \t%d minutos\n", ppTareas[i]->duracion);
-            printf("--\n");
         }
     }
 }
