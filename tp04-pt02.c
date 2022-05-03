@@ -16,6 +16,9 @@ void controlarTareas(tarea **, tarea **, int);
 void mostrarTareasRealizadas(tarea ** , int );
 void mostrarTareasPendientes(tarea ** , int );
 
+void buscarTarea(tarea **, int);
+
+
 int main(int argc, char const *argv[])
 {
     int cantTareas;
@@ -139,6 +142,28 @@ void mostrarTareasPendientes(tarea ** ppTareas, int cantTareas)
             printf("Duracion de la tarea \t%d minutos\n", ppTareas[i]->duracion);
             printf("--\n");
             
+        }
+    }
+}
+
+void buscarTarea(tarea ** ppTareas, int cantTareas)
+{
+    char buscar[MAX];
+
+    printf("--\n");
+    printf("Ingrese la palabra a buscar: ");
+    gets(buscar);
+    fflush(stdin);
+
+    for (int i = 0; i < cantTareas; i++)
+    {
+        if (strstr(ppTareas[i]->pDescripcion, buscar))
+        {
+            printf("Tarea ID \t%d\n", ppTareas[i]->tareaID);
+            printf("Descripcion de la tarea:\n");
+            puts(ppTareas[i]->pDescripcion);
+            printf("Duracion de la tarea \t%d minutos\n", ppTareas[i]->duracion);
+            printf("--\n");
         }
     }
 }
