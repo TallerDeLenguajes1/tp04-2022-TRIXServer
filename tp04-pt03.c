@@ -15,7 +15,8 @@ struct tarea
 struct nodo
 {
     tarea tareaEnNodo; 
-    nodo * next;
+    struct nodo * next;
+
 } typedef nodo;
 
 nodo * crearNodo();
@@ -24,7 +25,7 @@ void agregarNodos(nodo **, int);
 void controlarTareas(nodo **, nodo **, int);
 void mostrarTarea(nodo *, int);
 void insertarNodo(nodo **, int, char *, int);
-nodo * crearEsteNodo(int, char, int);
+nodo * crearEsteNodo(int, char *, int);
 
 int main(int argc, char const *argv[])
 {
@@ -102,7 +103,7 @@ void insertarNodo(nodo ** inicioLista, int ID, char * descripcion, int duracion)
     * inicioLista = nuevoNodo;
 }
 
-nodo * crearEsteNodo(int ID, char descripcion, int duracion)
+nodo * crearEsteNodo(int ID, char * descripcion, int duracion)
 {
     nodo * nuevoNodo = (nodo *) malloc(sizeof(nodo));
 
@@ -129,7 +130,7 @@ void controlarTareas(nodo ** listaDeTareas, nodo ** listaDeTareasRealizadas, int
         mostrarTarea(* listaDeTareas, i);
 
         printf("--\n");
-        printf("La tarea ID %d fue realizada 0: NO - 1: SI : ", i);
+        printf("La tarea ID %d fue realizada 0: NO - 1: SI : ", (* listaDeTareas)->tareaEnNodo.tareaID);
         scanf("%d", &flag);
         fflush(stdin);
 
@@ -140,7 +141,7 @@ void controlarTareas(nodo ** listaDeTareas, nodo ** listaDeTareasRealizadas, int
         }
         else
         {
-            insertarNodo(nodoAuxiliar, (* listaDeTareas)->tareaEnNodo.tareaID, (* listaDeTareas)->tareaEnNodo.pDescripcion, (* listaDeTareas)->tareaEnNodo.duracion);
+            insertarNodo(&nodoAuxiliar, (* listaDeTareas)->tareaEnNodo.tareaID, (* listaDeTareas)->tareaEnNodo.pDescripcion, (* listaDeTareas)->tareaEnNodo.duracion);
 
         }
         * listaDeTareas = (* listaDeTareas)->next;
