@@ -142,3 +142,26 @@ void mostrarTareasPendientes(tarea ** ppTareas, int cantTareas)
         }
     }
 }
+
+
+void buscarTarea(tarea ** ppTareas, int cantTareas)
+{
+    int buscar;
+
+    printf("--\n");
+    printf("Ingrese el ID a buscar: ");
+    scanf("%d", &buscar);
+    fflush(stdin);
+
+    for (int i = 0; i < cantTareas; i++)
+    {
+        if (ppTareas[i]->tareaID == buscar)
+        {
+            printf("Tarea ID \t%d\n", ppTareas[i]->tareaID);
+            printf("Descripcion de la tarea:\n");
+            puts(ppTareas[i]->pDescripcion);
+            printf("Duracion de la tarea \t%d minutos\n", ppTareas[i]->duracion);
+            printf("--\n");
+        }
+    }
+}
