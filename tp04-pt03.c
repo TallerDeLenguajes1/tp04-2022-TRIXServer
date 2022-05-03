@@ -26,16 +26,6 @@ void mostrarTarea(nodo *, int);
 void insertarNodo(nodo **, int, char *, int);
 nodo * crearEsteNodo(int, char, int);
 
-
-
-//
-void mostrarTareasRealizadas(tarea ** , int );
-void mostrarTareasPendientes(tarea ** , int );
-
-void buscarTareaPorID(tarea **, int);
-void buscarTareaPorPalabra(tarea **, int);
-//
-
 int main(int argc, char const *argv[])
 {
     int cantTareas;
@@ -104,11 +94,22 @@ void agregarNodos(nodo ** ppListaTareas, int cantTareas)
 void insertarNodo(nodo ** startLista, int ID, char * descripcion, int duracion)
 {
     nodo * nNodo = crearEsteNodo(ID, descripcion, duracion);
-
+    nNodo->next = * startLista;
+    * startLista = nNodo;
 }
 
 nodo * crearEsteNodo(int ID, char descripcion, int duracion)
 {
+    nodo * tarea = (nodo *) malloc(sizeof(nodo));
+
+    tarea->nTarea.tareaID = ID;
+    tarea->nTarea.pDescripcion = (char *) malloc((strlen(descripcion) + 1) * sizeof(char));
+    strcpy(tarea->nTarea.pDescripcion, descripcion);
+    tarea->nTarea.duracion = duracion;
+
+    tarea->next = NULL;
+
+    return (tarea);
 
 }
 
@@ -130,16 +131,12 @@ void controlarTareas(nodo ** ppListaTareas, nodo ** ppTareasRealizadas, int cant
 
         if (flag == 1)
         {
-            ppTareasRealizadas[i]->tareaID = ppTareas[i]->tareaID;
-            ppTareasRealizadas[i]->pDescripcion = (char *) malloc(sizeof(char) * (strlen(ppTareas[i]->pDescripcion) + 1));
-            strcpy(ppTareasRealizadas[i]->pDescripcion, ppTareas[i]->pDescripcion);
-            ppTareasRealizadas[i]->duracion = ppTareas[i]->duracion;
-            ppTareas[i] = NULL;
-
+            insertarNodo(ppTareasRealizadas, (* ppListaTareas)->nTarea.tareaID, (* ppListaTareas)->nTarea.pDescripcion, (* ppListaTareas)->nTarea.duracion);
+            
         }
         else
         {
-            ppTareasRealizadas[i] = NULL;
+            insertarNodo(nAux, (* ppListaTareas)->nTarea.tareaID, (* ppListaTareas)->nTarea.pDescripcion, (* ppListaTareas)->nTarea.duracion);
 
         }
 
@@ -165,7 +162,14 @@ void mostrarTarea(nodo * pLista, int ID)
     }
 }
 
-//
+/*
+void mostrarTareasRealizadas(tarea ** , int );
+void mostrarTareasPendientes(tarea ** , int );
+void buscarTareaPorID(tarea **, int);
+void buscarTareaPorPalabra(tarea **, int);
+*/
+
+/*
 void mostrarTareasRealizadas(tarea ** ppTareasRealizadas, int cantTareas)
 {
     printf("--\n");
@@ -253,4 +257,4 @@ void buscarTareaPorPalabra(tarea ** ppTareas, int cantTareas)
 
 
 
-//
+*/
