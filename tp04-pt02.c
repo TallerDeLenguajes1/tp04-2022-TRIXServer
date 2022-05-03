@@ -33,9 +33,13 @@ int main(int argc, char const *argv[])
     cargarTareas(ppTareas, cantTareas);
 
     tarea ** ppTareasRealizadas;
-    ppTareasRealizadas = (tarea **) malloc(sizeof(tarea) * cantTareas);
+    ppTareasRealizadas = (tarea **) malloc(sizeof(tarea *) * cantTareas);
 
     controlarTareas(ppTareas, ppTareasRealizadas, cantTareas);
+
+    mostrarTareasRealizadas(ppTareasRealizadas, cantTareas);
+
+    mostrarTareasPendientes(ppTareas, cantTareas);
 
     return 0;
 }
@@ -60,7 +64,7 @@ void cargarTareas(tarea ** ppTareas, int cantTareas)
         
         printf("--\n");
         printf("Cargar duracion de la tarea:\n");
-        scanf("%d", ppTareas[i]->duracion);
+        scanf("%d", &ppTareas[i]->duracion);
         fflush(stdin);
 
     }
@@ -70,14 +74,14 @@ void cargarTareas(tarea ** ppTareas, int cantTareas)
 
 void controlarTareas(tarea ** ppTareas, tarea ** ppTareasRealizadas, int cantTareas)
 {
-    int flag;
     for (int i = 0; i < cantTareas; i++)
     {
-        ppTareas[i] = (tarea *) malloc(sizeof(tarea));
+        ppTareasRealizadas[i] = (tarea *) malloc(sizeof(tarea));
+        int flag;  
 
         printf("--\n");
-        printf("La tarea %d fue realizada 0: NO - 1: SI : ", i + 1);
-        scanf("%d", &flag);
+        printf("La tarea ID %d fue realizada 0: NO - 1: SI : ", ppTareas[i]->tareaID);
+        scanf("%i", &flag);
         fflush(stdin);
 
         if (flag == 1)
@@ -101,10 +105,40 @@ void controlarTareas(tarea ** ppTareas, tarea ** ppTareasRealizadas, int cantTar
 
 void mostrarTareasRealizadas(tarea ** ppTareasRealizadas, int cantTareas)
 {
+    printf("--\n");
+    printf("Tareas Realizadas\n");
+    printf("--\n");
 
+    for (int i = 0; i < cantTareas; i++)
+    {
+        if (ppTareasRealizadas[i] != NULL)
+        {
+            printf("Tarea ID \t%d\n", ppTareasRealizadas[i]->tareaID);
+            printf("Descripcion de la tarea:\n");
+            puts(ppTareasRealizadas[i]->pDescripcion);
+            printf("Duracion de la tarea \t%d minutos\n", ppTareasRealizadas[i]->duracion);
+            printf("--\n");
+
+        }
+    }
 }
 
 void mostrarTareasPendientes(tarea ** ppTareas, int cantTareas)
 {
+    printf("--\n");
+    printf("Tareas Pendientes\n");
+    printf("--\n");
 
+    for (int i = 0; i < cantTareas; i++)
+    {
+        if (ppTareas[i] != NULL)
+        {
+            printf("Tarea ID \t%d\n", ppTareas[i]->tareaID);
+            printf("Descripcion de la tarea:\n");
+            puts(ppTareas[i]->pDescripcion);
+            printf("Duracion de la tarea \t%d minutos\n", ppTareas[i]->duracion);
+            printf("--\n");
+            
+        }
+    }
 }
